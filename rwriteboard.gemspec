@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name     = "rwriteboard"
-  s.version  = "0.1.0"
+  s.version  = "0.1.1"
   s.date     = "2008-11-15"
   s.summary  = "Interface to writeboard"
   s.email    = "mhennemeyer@gmail.com"

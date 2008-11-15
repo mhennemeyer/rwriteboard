@@ -1,5 +1,6 @@
 require 'rubygems'
 require 'net/http'
+require File.dirname(__FILE__) + "/string_extension.rb"
 
 class Writeboard
   
