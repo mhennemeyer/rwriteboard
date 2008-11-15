@@ -4,10 +4,35 @@ by Matthias Hennemeyer <mhennemeyer@gmail.com>
 
 == Introduction
 
+Fetch a writeboard by path and password.
 
 
 
 == Usage
+
+require 'rwriteboard'
+
+Create a local reference to a writeboard: 
+  Writeboard.create({
+    :name => "some name",
+    :path => "/sadfasdfasdf", # the custom part of the url
+    :password => "123123"
+  })
+
+Use it to read the title and the body of the writeboard:
+title = ""
+body = ""
+Writeboard.find(:name => "some name") do |writeboard|
+  writeboard.get
+  title = writeboard.title
+  body  = writeboard.body
+end
+
+Use it to change the title of the writeboard:
+Writeboard.find(:name => "some name") do |writeboard|
+  writeboard.title = "some other title"
+  writeboard.post_without_revision
+end
 
   
   
@@ -15,7 +40,7 @@ by Matthias Hennemeyer <mhennemeyer@gmail.com>
   
 == INSTALL:
 
-  $ ruby script/plugin install git://github.com/mhennemeyer/model_factory.git
+  $ sudo gem install mhennmemeyer-rwriteboard
 
 
 Copyright (c) 2008 Matthias Hennemeyer, released under the MIT license
