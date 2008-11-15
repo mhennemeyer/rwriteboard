@@ -1,0 +1,21 @@
+= RWriteboard
+
+by Matthias Hennemeyer <mhennemeyer@gmail.com>
+
+== Introduction
+
+
+
+
+== Usage
+
+  
+  
+  
+  
+== INSTALL:
+
+  $ ruby script/plugin install git://github.com/mhennemeyer/model_factory.git
+
+
+Copyright (c) 2008 Matthias Hennemeyer, released under the MIT license
