@@ -19,7 +19,7 @@ class Writeboard
   def @@writeboards.find(hash)
     memo = self
     hash.each do |k,v|
-      memo = [memo.detect {|wb| wb.respond_to?(k.to_sym) && wb.send(k.to_sym) == v}]
+      memo = [memo.detect {|wb| !wb.nil? && wb.respond_to?(k.to_sym) && wb.send(k.to_sym) == v}]
     end
     memo.first
   end
@@ -29,6 +29,7 @@ class Writeboard
     self.path     = hash[:path]
     self.name     = hash[:name]
     @@writeboards << self
+    self
   end
   
   def get
