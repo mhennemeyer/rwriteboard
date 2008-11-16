@@ -19,7 +19,7 @@ class Writeboard
   def @@writeboards.find(hash)
     memo = self
     hash.each do |k,v|
-      memo = [memo.detect {|wb| wb.send(k.to_sym) == v}]
+      memo = [memo.detect {|wb| wb.respond_to?(k.to_sym) && wb.send(k.to_sym) == v}]
     end
     memo.first
   end
@@ -28,6 +28,7 @@ class Writeboard
     self.password = hash[:password]
     self.path     = hash[:path]
     self.name     = hash[:name]
+    @@writeboards << self
   end
   
   def get
@@ -71,7 +72,6 @@ class Writeboard
     path = "/" + path unless path =~ /^\//
     name = hash[:name] || self.count + 1
     wb = self.new(:password => password, :path => path, :name => name)
-    @@writeboards << wb
     if block_given?
       wb.logged_in do |_wb|
         yield _wb
