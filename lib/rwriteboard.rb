@@ -19,9 +19,9 @@ class Writeboard
   def @@writeboards.find(hash)
     memo = self
     hash.each do |k,v|
-      memo = memo.detect {|wb| wb.send(k.to_sym) == v}
+      memo = [memo.detect {|wb| wb.send(k.to_sym) == v}]
     end
-    memo
+    memo.first
   end
   
   def initialize(hash)
