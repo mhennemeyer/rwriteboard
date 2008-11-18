@@ -13,7 +13,9 @@ describe Writeboard do
       :name => "Feature1",
       :password => password,
       :path => path
-    })
+    }) do |wb|
+      wb.post_without_revision(:body => 'Feature: FeatureTitle\n In order to gain profits', :title => "first writeboard")
+    end
   end
   
   describe ".create(hash)" do
@@ -88,7 +90,7 @@ describe Writeboard do
     end
     it "should set the writeboards body" do
       Writeboard.find :name => "Feature1" do |wb|
-        wb.get.body.should eql('Feature: FeatureTitle\n In order to gain profits')
+        wb.get.body.should eql("Feature: FeatureTitle\n In order to gain profits")
       end
     end
   end
@@ -97,13 +99,21 @@ describe Writeboard do
     it "should post to the writeboard and make no new revision" do
       Writeboard.find :name => "Feature1" do |wb|
         wb.post_without_revision(:body => 'Feature: FeatureTitle\n In order to gain profits')
-        wb.get.body.should eql('Feature: FeatureTitle\n In order to gain profits')
+        wb.get.body.should eql("Feature: FeatureTitle\n In order to gain profits")
       end
     end
     
     it "should get what it posts" do
       Writeboard.find :name => "Feature1" do |wb|
-        string = 'Feature: FeatureTitle\n In order to gain profits'
+        string = "Feature: FeatureTitle\nIn order to gain profits"
+        wb.post_without_revision(:body => string)
+        wb.get.body.should eql(string)
+      end
+    end
+    
+    it "should post quotes" do
+      Writeboard.find :name => "Feature1" do |wb|
+        string = "Feature: FeatureTitle\nIn order to 'gain' profits"
         wb.post_without_revision(:body => string)
         wb.get.body.should eql(string)
       end

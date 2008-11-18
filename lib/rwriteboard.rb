@@ -33,9 +33,9 @@ class Writeboard
   end
   
   def get
-    response_body = self.http.get(self.path, self.cookie).body
+    response_body = self.http.get(self.path, self.cookie).body.html_entity_quotes
     self.title    = response_body.scan(%r{<div class="writeboardtitle">(.*?)</div>}m).to_s.strip_tags
-    self.body     = response_body.scan(%r{<div class="writeboardbody">(.*?)</div>}m).to_s.strip_tags
+    self.body     = response_body.scan(%r{<div class="writeboardbody">(.*?)</div>}m).to_s.strip_tags.unescape_newlines
     self
   end
   
